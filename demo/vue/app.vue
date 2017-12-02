@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import { NumericKeyboard, NumericInput, keys } from 'vue-numeric-keyboard/lib'
+  import { NumericKeyboard, NumericInput, keys } from 'vue-numeric-keyboard'
   export default {
     components: {
       NumericKeyboard,

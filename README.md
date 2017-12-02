@@ -1,17 +1,46 @@
 # Numeric Keyboard
 
-[![Build Status](https://travis-ci.org/viclm/vue-numeric-keyboard.svg?branch=master)](https://travis-ci.org/viclm/vue-numeric-keyboard)
+[![Build Status](https://travis-ci.org/viclm/numeric-keyboard.svg?branch=master)](https://travis-ci.org/viclm/numeric-keyboard)
 
-A numeric keyboard used in mobile created by Vue 2 component. It contains a pluggable keyboard component and a input + keyboard suit.
+A numeric keyboard works in mobile browsers. It contains a pluggable keyboard component which is used to respond to user input and a textbox + keyboard suit in replace of native input element.
+
+The numeric keyboard have several versions: plain javascript class and Vue 2 component
+
+[Watch the demo video](https://fast.wistia.net/embed/iframe/f40gilnlxp)
 
 ## Install
 You can intall this component via yarn
 
 ```shell
-yarn add vue-numeric-keyboard
+yarn add numeric-keyboard
 ```
 
 ## Usage
+
+### Plain JavaScript
+```javascript
+import { NumericKeyboard, keys } from 'numeric-keyboard'
+new NumericKeyboard('.keyboard-ui', {
+  layout: 'tel',
+  theme: {
+    key: {
+      [keys.DEL]: {
+        color: '#ffffff',
+        backgroundColor: ['#a8b0bc', '#929ba8']
+      },
+      [keys.ENTER]: {
+        color: '#ffffff',
+        backgroundColor: ['#a8b0bc', '#929ba8']
+      }
+    }
+  },
+  entertext: 'send',
+  onpress(key) {
+    ...
+  }
+})
+```
+### Vue 2
 ```vue
 <template>
    <div class="keyboard">
@@ -20,7 +49,7 @@ yarn add vue-numeric-keyboard
 </template>
 
 <script>
-  import { NumericKeyboard, keys } from 'vue-numeric-keyboard'
+  import { NumericKeyboard, keys } from 'numeric-keyboard'
   export default {
     components: {
       NumericKeyboard
@@ -50,7 +79,7 @@ yarn add vue-numeric-keyboard
 </script>
 ```
 
-## props
+## options/props
 ```javascript
 // change the layout of keyboard
  layout: {
@@ -73,16 +102,16 @@ yarn add vue-numeric-keyboard
 There are two build-in layout called **number** and **tel** which can be used as a replace of system keyboard. You can still rearrange all the keys to create your own layout. The layout object is two-dimension array which constructs a table layout, you can make table-specific operations like merging cells.
 
 #### number layout
-![number layout](https://raw.githubusercontent.com/viclm/vue-numeric-keyboard/master/demo/snapshot_number.png)
+![number layout](https://raw.githubusercontent.com/viclm/numeric-keyboard/master/demo/snapshot_number.png)
 
 #### tel layout
-![tel layout](https://raw.githubusercontent.com/viclm/vue-numeric-keyboard/master/demo/snapshot_tel.png)
+![tel layout](https://raw.githubusercontent.com/viclm/numeric-keyboard/master/demo/snapshot_tel.png)
 
 #### custom layout
 ```javascript
 // the build-in number layout
 
-import { keys } from 'vue-numeric-keyboard'
+import { keys } from 'numeric-keyboard'
 
 [
   [
@@ -145,7 +174,7 @@ The style of keyboard can be modified global or per key, currently it only suppo
 ```javascript
 // the default style declaration
 
-import { keys } from 'vue-numeric-keyboard'
+import { keys } from 'numeric-keyboard'
 
 {
   global: {
@@ -163,14 +192,15 @@ import { keys } from 'vue-numeric-keyboard'
 }
 ```
 
-## events
+## callback/events
 
 ### `press`
 the `press` event is emit with a key code when the key is pressed.
 
-## input + keyboard suit
+## textbox + keyboard suit
 
-The keyboard which created by javascript can not work with normal text input element, the component provide a custom input + keyboard suit which can be used in a normal form situation.
+The keyboard which created by javascript can not work with normal text input element, the component provide a custom textbox + keyboard suit which can be used in a normal form situation.
+### Vue 2
 ```vue
 <template>
   <div class="input">
@@ -180,7 +210,7 @@ The keyboard which created by javascript can not work with normal text input ele
 </template>
 
 <script>
-  import { NumericInput } from 'vue-numeric-keyboard/lib'
+  import { NumericInput } from 'numeric-keyboard'
   export default {
     components: {
       NumericInput
@@ -195,7 +225,7 @@ The keyboard which created by javascript can not work with normal text input ele
 
 ```
 
-### props
+### options/props
 Since it is a replace of html input element, most properties is supported.
 ```javascript
 // There are only two types: number and tel because it only contains a numeric keyboard
@@ -237,7 +267,7 @@ keyboard: {
 }
 ```
 
-### events
+### callback/events
 
 #### `input`
 The `input` event is emit when the value of input changes
